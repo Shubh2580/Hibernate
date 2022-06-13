@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 8, 2022 4:30:26 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="in.co.rays.person.Address" table="ADDRESS">
+        <id name="Id" type="int">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <property name="Street" type="java.lang.String">
+            <column name="STREET" />
+        </property>
+        <property name="City" type="java.lang.String">
+            <column name="CITY" />
+        </property>
+        <property name="State" type="java.lang.String">
+            <column name="STATE" />
+        </property>
+        <one-to-one name="employee" class="in.co.rays.person.Employee" cascade="all"></one-to-one>
+    </class>
+</hibernate-mapping>

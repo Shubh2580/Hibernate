@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 10, 2022 4:52:27 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="in.co.rays.inheritance1.Payment" table="PAYMENT">
+    
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <discriminator column="PAYMENTTYPE" type="java.lang.String"></discriminator>
+        <property name="amount" type="int">
+            <column name="AMOUNT" />
+        </property>
+        <!-- <property name="paymenttype" type="java.lang.String">
+            <column name="PAYMENTTYPE" />
+        </property> -->
+        
+         <subclass name="in.co.rays.inheritance1.CreditCard" discriminator-value="CREDIT">
+         <join table="Credit">
+        <key>
+            <column name="PAYMENTID" />
+        </key>
+        <property name="PaymentId" type="int" insert="false" update="false">
+            <column name="PAYMENTID" />
+        </property>
+        <property name="cc_type" type="java.lang.String" access="field">
+            <column name="CC_TYPE" />
+        </property>
+        
+        
+        </join>
+        </subclass>
+        
+        <subclass name="in.co.rays.inheritance1.Cheque" discriminator-value="CHEQUE">
+         <join table="Cheque">
+         <key>
+            <column name="PAYMENTID" />
+        </key>
+       
+        <property name="PaymentId" type="int" insert="false" update="false">
+            <column name="PAYMENTID" />
+        </property>
+         <property name="chqnumber" type="int">
+            <column name="CHQNUMBER" />
+        </property>
+        <property name="bankname" type="java.lang.String">
+            <column name="BANKNAME" />
+        </property>
+        </join>
+    </subclass>
+        
+        
+    </class>
+</hibernate-mapping>

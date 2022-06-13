@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 9, 2022 5:43:40 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="in.co.rays.inheritance.PaymentPOJO"
+		table="PAYMENTPOJO" discriminator-value="payment">
+
+		<id name="id" type="long">
+			<column name="ID" />
+			<generator class="assigned" />
+		</id>
+
+		<discriminator column="PAYMENTTYPE"
+			type="java.lang.String">
+		</discriminator>
+
+		<property name="amount" type="float">
+			<column name="AMOUNT" />
+		</property>
+
+		<!-- <property name="paymentType" type="java.lang.String"> <column name="PAYMENTTYPE" 
+			/> </property> -->
+
+		<subclass name="in.co.rays.inheritance.CreditCardPaymentPOJO"
+			discriminator-value="credit">
+			<property name="ccType" column="CC_TYPE"></property>
+		</subclass>
+
+		<subclass name="in.co.rays.inheritance.CashPOJO"
+			discriminator-value="cash">
+		</subclass>
+
+		<subclass name="in.co.rays.inheritance.ChequePOJO"
+			discriminator-value="cheque">
+			<property name="chqNumber" column="CHQ_NUMBER"></property>
+			<property name="bankName" column="BANK_NAME"></property>
+		</subclass>
+	</class>
+</hibernate-mapping>
